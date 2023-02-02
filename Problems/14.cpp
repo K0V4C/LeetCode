@@ -9,7 +9,7 @@ public:
             bool flag = 1;
 
             for(auto elem : strs){
-                if(strs[0][i] != elem[i]){
+                if(strs[0][i] != elem[i]){ 
                     flag = 0;
                 }
             }
