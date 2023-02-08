@@ -1,28 +1,32 @@
 class Solution {
 public:
     bool isValid(string s) {
-        int first = 0;
-        int second = 0;
-        int third = 0;
+        std::stack<char> st;
 
         for(auto elem: s){
             switch(elem){
                 case '(':
-                    first++; break;
-                case ')':
-                    first--; break;
+                    st.push('('); break;
                 case '{':
-                    second++; break;
-                case '}':
-                    second--; break;
+                    st.push('{'); break;
                 case '[':
-                    third++; break;
+                    st.push('['); break;
+                case ')':
+                    if(st.empty()) return false;
+                    if(st.top() != '(') return false;
+                    st.pop(); break;
+                case '}':
+                    if(st.empty()) return false;
+                    if(st.top() != '{') return false;
+                    st.pop(); break;
                 case ']':
-                    third--; break;
+                    if(st.empty()) return false;
+                    if(st.top() != '[') return false;
+                    st.pop(); break;
             }
         }
 
-        return first == 0 && second == 0 && third == 0;
+        return st.empty();
 
     }
 };
