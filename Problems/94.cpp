@@ -17,13 +17,11 @@ private:
         if(!node)
             return;
 
-        if(node->left)
-            inorder(node->left, vec);
+        inorder(node->left, vec);
 
         vec.push_back(node->val);
 
-        if(node->right)
-            inorder(node->right, vec);
+        inorder(node->right, vec);
     }
 
 public:
@@ -32,5 +30,35 @@ public:
         inorder(root, vec);
 
         return vec;
+    }
+};
+
+//Iterative
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+
+        std::stack<TreeNode*> stack;
+
+        std::vector<int> vals;
+
+        TreeNode* curr = root;
+
+        while(!stack.empty() || curr){
+
+            while(curr){
+                stack.push(curr);
+                curr = curr->left;
+            }
+
+            curr = stack.top(); stack.pop();
+
+            vals.push_back(curr->val);
+
+            curr = curr->right;
+              
+        }
+
+        return vals;
     }
 };
