@@ -1,23 +1,17 @@
+use std::collections::HashSet;
 impl Solution {
-    pub fn is_anagram(s: String, t: String) -> bool {
-        let mut map: Vec<usize> = vec![0; 26];
+    pub fn contains_duplicate(nums: Vec<i32>) -> bool {
+        let mut map: HashSet<i32> = HashSet::new();
 
-        if s.len() != t.len() {
-            return false;
-        }
-
-        for i in s.as_bytes() {
-            map[(i - b'a') as usize] += 1;
-        }
-
-        for i in t.as_bytes() {
-            if map[(i - b'a') as usize] == 0 {
-                return false;
+        for i in nums.iter() {
+            if map.contains(i) == false {
+                map.insert(*i);
+            } else {
+                return true;
             }
-
-            map[(i - b'a') as usize] -= 1;
         }
 
-        true
+        false
     }
 }
+
