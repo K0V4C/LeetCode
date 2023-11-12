@@ -1,23 +1,28 @@
 impl Solution {
     pub fn is_anagram(s: String, t: String) -> bool {
-        let mut map: Vec<usize> = vec![0; 26];
+
+        let mut t = t;
 
         if s.len() != t.len() {
             return false;
         }
 
-        for i in s.as_bytes() {
-            map[(i - b'a') as usize] += 1;
+        for (i, x) in s.bytes().enumerate(){
+        let index:i32 = match t.find(x as char) {
+            Some(v) => v as i32,
+            _ => -1,
+        };
+
+        if index == -1 {
+            return false;
         }
 
-        for i in t.as_bytes() {
-            if map[(i - b'a') as usize] == 0 {
-                return false;
-            }
+        t.remove(index as usize);
+    }
 
-            map[(i - b'a') as usize] -= 1;
-        }
+    true
 
-        true
+
+        
     }
 }
